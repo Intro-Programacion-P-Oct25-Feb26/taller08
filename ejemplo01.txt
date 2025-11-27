@@ -1,0 +1,94 @@
+1.  Inicio
+2.  // Variables
+3.  nombrePaciente, x(50)[{a-z}, {A-Z}, {0-9}, {BS}]
+4.  edadPaciente, i[0-n]
+5.  alturaMetros, d[0-n]
+6.  pesoKilogramos, d[0-n]
+7.  alturaCentimetros, d[0-n]
+8.  pesoLibras, d[0-n]
+9.  totalEdades, d[0-n]
+10. totalAlturasCentimetros, d[0-n]
+11. totalPesosLibras, d[0-n]
+12. totalPacientesRegistrados, i[0-n]
+
+13. respuestaUsuario, x(3)[{a-z}, {A-Z}, {0-9}, {BS}]
+14. banderaContinuar, l        // de tipo booleana
+
+15. reporteFinal, x(2000)[{a-z}, {A-Z}, {0-9}, {BS}]
+
+16. promedioEdad, d[0-n]
+17. promedioAlturaCentimetros, d[0-n]
+18. promedioPesoLibras, d[0-n]
+
+19. // Inicialización de acumuladores y bandera
+20. totalEdades <-- 0
+21. totalAlturasCentimetros <-- 0
+22. totalPesosLibras <-- 0
+23. totalPacientesRegistrados <-- 0
+24. banderaContinuar <-- verdadero
+
+25. reporteFinal <-- "REPORTE DE PACIENTES REGISTRADOS\n"
+26. reporteFinal <-- reporteFinal + "---------------------------------\n"
+
+27. Mientras banderaContinuar entonces
+
+28.     Escribir "Ingrese la edad del paciente:"
+29.     Leer edadPaciente
+
+30.     Si edadPaciente >= 10 Entonces
+
+33.         Escribir "Ingrese la altura en metros:"
+34.         Leer alturaMetros
+
+35.         Escribir "Ingrese el peso en kilogramos:"
+36.         Leer pesoKilogramos
+
+37.         alturaCentimetros <-- alturaMetros * 100
+38.         pesoLibras <-- pesoKilogramos * 2.2
+
+31.         Escribir "Ingrese el nombre del paciente:"
+32.         Leer nombrePaciente
+
+39.         totalEdades <-- totalEdades + edadPaciente
+40.         totalAlturasCentimetros <-- totalAlturasCentimetros + alturaCentimetros
+41.         totalPesosLibras <-- totalPesosLibras + pesoLibras
+42.         totalPacientesRegistrados <-- totalPacientesRegistrados + 1
+
+43.         reporteFinal <-- reporteFinal +
+                "Paciente " + totalPacientesRegistrados + ":\n" +
+                "  Nombre: " + nombrePaciente + "\n" +
+                "  Edad: " + edadPaciente + " años\n" +
+                "  Altura: " + alturaCentimetros + " cm\n" +
+                "  Peso: " + pesoLibras + " lb\n\n"
+
+44.     Fin Si
+
+45.     Escribir "¿Desea ingresar otro paciente? (s/n)"
+46.     Leer respuestaUsuario
+
+47.     Si respuestaUsuario != "s" Entonces
+48.         banderaContinuar <-- falso
+49.     Fin Si
+
+50. Fin Mientras
+
+51. Si totalPacientesRegistrados > 0 Entonces
+
+52.     promedioEdad <-- totalEdades / totalPacientesRegistrados
+53.     promedioAlturaCentimetros <-- totalAlturasCentimetros / totalPacientesRegistrados
+54.     promedioPesoLibras <-- totalPesosLibras / totalPacientesRegistrados
+
+55.     reporteFinal <-- reporteFinal +
+            "RESUMEN GENERAL\n" +
+            "---------------------------------\n" +
+            "Pacientes registrados: " + totalPacientesRegistrados + "\n" +
+            "Promedio de edades: " + promedioEdad + " años\n" +
+            "Promedio de alturas: " + promedioAlturaCentimetros + " cm\n" +
+            "Promedio de pesos: " + promedioPesoLibras + " lb\n"
+
+56. De lo contrario
+57.     reporteFinal <-- "NO SE REGISTRARON PACIENTES VÁLIDOS (edad >= 10 años)"
+58. Fin Si
+
+59. Escribir reporteFinal
+60. Fin
